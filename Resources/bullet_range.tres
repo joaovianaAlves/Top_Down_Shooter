@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BulletRangeUpgrade" load_steps=2 format=3 uid="uid://rtglifedmoq0"]
+
+[ext_resource type="Script" uid="uid://csv5eo3ddkxti" path="res://Components/Bullet/Range/bullet_range_upgrade.gd" id="1_x4hk6"]
+
+[resource]
+script = ExtResource("1_x4hk6")
+metadata/_custom_type_script = "uid://csv5eo3ddkxti"

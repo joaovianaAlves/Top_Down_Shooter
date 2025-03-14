@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvfijuufvkqd"]
+
+[ext_resource type="Script" uid="uid://h075valvhkam" path="res://Components/Bullet/bullet.gd" id="1_h8xwe"]
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="2_5gxa3"]
+[ext_resource type="PackedScene" uid="uid://bkuqtmdt02m8h" path="res://Components/Hitbox/HitboxComponent.tscn" id="3_5gxa3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_js6t0"]
+size = Vector2(10, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5pls"]
+size = Vector2(10, 4)
+
+[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("hitbox")]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_h8xwe")
+hitbox = NodePath("HitboxComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_js6t0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.625, 0.25)
+texture = ExtResource("2_5gxa3")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_5gxa3")]
+collision_layer = 0
+collision_mask = 4
+attack = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_w5pls")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="damaging" from="HitboxComponent" to="." method="_on_hitbox_component_damaging"]

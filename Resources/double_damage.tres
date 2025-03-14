@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BulletDamageUpgrade" load_steps=2 format=3 uid="uid://dtang1bllsp6t"]
+
+[ext_resource type="Script" uid="uid://dljjy5g04xt03" path="res://Components/Bullet/Damage/bullet_damage_upgrade.gd" id="1_h1bch"]
+
+[resource]
+script = ExtResource("1_h1bch")
+metadata/_custom_type_script = "uid://dljjy5g04xt03"

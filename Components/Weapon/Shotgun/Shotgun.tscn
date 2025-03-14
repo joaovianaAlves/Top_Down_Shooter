@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfqlwo0jvs7op"]
+
+[ext_resource type="Script" uid="uid://bddtd0d5ay6ks" path="res://Components/Weapon/Shotgun/shotgun.gd" id="1_ne1c5"]
+[ext_resource type="PackedScene" uid="uid://bvfijuufvkqd" path="res://Components/Bullet/Bullet.tscn" id="2_i3y7o"]
+
+[node name="Shotgun" type="Node2D" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("1_ne1c5")
+bullet = ExtResource("2_i3y7o")
+bullet_damage = 1.0
+bullet_speed = 500.0
+bullet_amount = 5
+bullet_spread = 45
+fire_delay = 0.8
+muzzle = NodePath("Muzzle")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Node2D"]
+position = Vector2(6.5, 0.8)
+scale = Vector2(2.5, 0.9)
+color = Color(0.341581, 0.200565, 0.0276345, 1)
+polygon = PackedVector2Array(1, -1, 1, -2, 1.66667, -2, 2.33333, -2, 2.33333, -2, 3, -2, 3, 4.66667, 2.6, 4.66667, 1, 4.66667)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D"]
+position = Vector2(4.14286, 0)
+scale = Vector2(2.57143, 0.666667)
+color = Color(0.0801014, 0.0764348, 0.0703679, 1)
+polygon = PackedVector2Array(-2, 0, -2, 2.96685, -2, 6, 5, 6, 5, 4, 5, 3, 5, 2, 5, 0, 1.51986, 0)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(17, 1)

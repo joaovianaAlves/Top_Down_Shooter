@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://be4o76w5gdh5g"]
+
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="1_0g2b2"]
+[ext_resource type="Script" uid="uid://cl767dhrbfw31" path="res://Components/Weapon/Pistol/pistol.gd" id="1_c4rgf"]
+[ext_resource type="PackedScene" uid="uid://bvfijuufvkqd" path="res://Components/Bullet/Bullet.tscn" id="2_daib3"]
+
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("muzzle")]
+script = ExtResource("1_c4rgf")
+bullet = ExtResource("2_daib3")
+bullet_damage = 0.5
+bullet_speed = 1000.0
+bullet_amount = 1
+fire_delay = 0.3
+muzzle = NodePath("Muzzle")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.57628e-07, 0)
+scale = Vector2(0.69825, 0.293107)
+texture = ExtResource("1_0g2b2")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(6, 0)
+scale = Vector2(-1.73536, -9.91558)

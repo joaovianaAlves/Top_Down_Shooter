@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BulletSpeedUpgrade" load_steps=2 format=3 uid="uid://4qvdxcsmalee"]
+
+[ext_resource type="Script" uid="uid://k0saqbqm0nsp" path="res://Components/Bullet/Speed/bullet_speed_upgrade.gd" id="1_h0aj2"]
+
+[resource]
+script = ExtResource("1_h0aj2")
+metadata/_custom_type_script = "uid://k0saqbqm0nsp"

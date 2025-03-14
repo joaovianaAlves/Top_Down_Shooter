@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx3cagf38w6hk"]
+
+[ext_resource type="Script" uid="uid://t4jq8e1cprwq" path="res://Components/Pickups/upgrade_pickup.gd" id="1_mj65m"]
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="2_oql38"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mj65m"]
+size = Vector2(18, 18)
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource("1_mj65m")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mj65m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_oql38")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

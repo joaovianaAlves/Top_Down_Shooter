@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://crltd8ydojsww"]
+
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="1_ils2c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bm5lk"]
+size = Vector2(16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ils2c"]
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[node name="Timemap" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_ils2c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_bm5lk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_ils2c")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d23uae8tpluiv"]
+
+[ext_resource type="Script" uid="uid://cb8s7j1n125db" path="res://Components/Bullet/BulletStatUpgrade/bullet_stat_upgrade.gd" id="1_0u6ya"]
+
+[node name="BulletStatUpgrade" type="Node2D"]
+script = ExtResource("1_0u6ya")

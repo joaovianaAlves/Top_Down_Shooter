@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dm57kimri4ldl"]
+
+[ext_resource type="Script" uid="uid://bepe7w2ttxy8l" path="res://Entities/player/player.gd" id="1_fe6c5"]
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="2_wkjva"]
+[ext_resource type="Texture2D" uid="uid://dxxqdbs3l0opo" path="res://Art/NaD6F.png" id="3_wkjva"]
+[ext_resource type="Texture2D" uid="uid://ur2e8lh1fyrf" path="res://Art/lIPOG.jpg" id="4_13ous"]
+[ext_resource type="PackedScene" uid="uid://bhfcj8m31dk5i" path="res://Components/Health/health_component.tscn" id="5_yfiod"]
+[ext_resource type="PackedScene" uid="uid://div4a46u2vhwa" path="res://Components/Hurtbox/Hurtbox.tscn" id="6_yxyux"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1iada"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxyux"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_fe6c5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1iada")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wkjva")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("3_wkjva")
+texture_scale = 0.3
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(57, -0.725002)
+scale = Vector2(1, 1.23858)
+shadow_enabled = true
+texture = ExtResource("4_13ous")
+texture_scale = 0.8
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_yfiod")]
+max_health = 1
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_yxyux")]
+collision_layer = 2
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_yxyux")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

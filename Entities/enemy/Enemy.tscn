@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfnl1dxd8nfg5"]
+
+[ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="1_betop"]
+[ext_resource type="Script" uid="uid://lw47uva22l1x" path="res://Entities/enemy/enemy.gd" id="1_penkh"]
+[ext_resource type="PackedScene" uid="uid://bhfcj8m31dk5i" path="res://Components/Health/health_component.tscn" id="3_5q5u2"]
+[ext_resource type="PackedScene" uid="uid://div4a46u2vhwa" path="res://Components/Hurtbox/Hurtbox.tscn" id="4_rle0d"]
+[ext_resource type="PackedScene" uid="uid://bkuqtmdt02m8h" path="res://Components/Hitbox/HitboxComponent.tscn" id="5_rle0d"]
+[ext_resource type="PackedScene" uid="uid://d006g8dqgs6c0" path="res://Components/DamageIndicator/damage_indicator.tscn" id="6_tx5fr"]
+[ext_resource type="PackedScene" uid="uid://e8bb6s6de4x8" path="res://Components/HealthBar/HealthBar.tscn" id="7_q7ig6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_penkh"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx5fr"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rle0d"]
+size = Vector2(14, 14)
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent")]
+light_mask = 2
+visibility_layer = 2
+script = ExtResource("1_penkh")
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.19209e-07, 1.19209e-07)
+shape = SubResource("RectangleShape2D_penkh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(2.23517e-07, -1.19209e-07)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_betop")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_path_custom_point_size = 18.65
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_5q5u2")]
+max_health = 1
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_rle0d")]
+collision_layer = 4
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_tx5fr")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_rle0d")]
+collision_layer = 0
+collision_mask = 2
+attack = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_rle0d")
+
+[node name="DamageIndicator" parent="." node_paths=PackedStringArray("hurtbox_component") instance=ExtResource("6_tx5fr")]
+hurtbox_component = NodePath("../Hurtbox")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("7_q7ig6")]
+health = NodePath("../HealthComponent")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
