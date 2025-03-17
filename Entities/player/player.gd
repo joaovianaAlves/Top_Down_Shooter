@@ -32,6 +32,9 @@ func get_input():
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Shoot"):
 		gun.fire(stats_changers)
+		
+	if Input.is_action_just_pressed("R"):
+		gun.reload()
 
 	if Input.is_action_just_pressed("ScrollUp"):
 		pistol.hide()

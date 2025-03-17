@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm8oqpsnjs80m"]
+
+[ext_resource type="Script" uid="uid://b5vod7m2ff5oi" path="res://Components/Bullet/ShellComponent/shell_component.gd" id="1_715jx"]
+
+[node name="ShellComponent" type="Node2D"]
+script = ExtResource("1_715jx")

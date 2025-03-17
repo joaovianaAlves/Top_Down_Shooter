@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx0hvd1heqhqk"]
+
+[ext_resource type="Texture2D" uid="uid://bxon28f85yf5r" path="res://Art/blood (1).png" id="1_geatf"]
+[ext_resource type="Script" uid="uid://i5uv6jwv038w" path="res://Components/Blood/blood.gd" id="2_geatf"]
+
+[sub_resource type="Curve" id="Curve_geatf"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.880682, 100), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Blood" type="CPUParticles2D"]
+amount = 20
+texture = ExtResource("1_geatf")
+lifetime = 0.5
+explosiveness = 1.0
+local_coords = true
+direction = Vector2(-1, 0)
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 300.0
+damping_min = 50.0
+damping_max = 100.0
+damping_curve = SubResource("Curve_geatf")
+script = ExtResource("2_geatf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

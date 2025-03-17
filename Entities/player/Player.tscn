@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm57kimri4ldl"]
+[gd_scene load_steps=11 format=3 uid="uid://dm57kimri4ldl"]
 
 [ext_resource type="Script" uid="uid://bepe7w2ttxy8l" path="res://Entities/player/player.gd" id="1_fe6c5"]
 [ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="2_wkjva"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ur2e8lh1fyrf" path="res://Art/lIPOG.jpg" id="4_13ous"]
 [ext_resource type="PackedScene" uid="uid://bhfcj8m31dk5i" path="res://Components/Health/health_component.tscn" id="5_yfiod"]
 [ext_resource type="PackedScene" uid="uid://div4a46u2vhwa" path="res://Components/Hurtbox/Hurtbox.tscn" id="6_yxyux"]
+[ext_resource type="Script" uid="uid://cwejwk6hpy8jm" path="res://Entities/player/ammo_count.gd" id="7_8781j"]
+[ext_resource type="FontFile" uid="uid://i1bvjx1s5st7" path="res://Art/Fonts/Minecraft.ttf" id="7_baoej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iada"]
 size = Vector2(16, 16)
@@ -14,6 +16,7 @@ size = Vector2(16, 16)
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_fe6c5")
@@ -28,11 +31,13 @@ texture = ExtResource("2_wkjva")
 zoom = Vector2(2, 2)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 shadow_enabled = true
 texture = ExtResource("3_wkjva")
 texture_scale = 0.3
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(57, -0.725002)
 scale = Vector2(1, 1.23858)
 shadow_enabled = true
@@ -49,5 +54,25 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_yxyux")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="AmmoCount" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_baoej")
+theme_override_font_sizes/font_size = 100
+script = ExtResource("7_8781j")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

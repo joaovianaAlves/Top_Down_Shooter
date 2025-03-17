@@ -1,17 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfqlwo0jvs7op"]
+[gd_scene load_steps=6 format=3 uid="uid://cfqlwo0jvs7op"]
 
 [ext_resource type="Script" uid="uid://bddtd0d5ay6ks" path="res://Components/Weapon/Shotgun/shotgun.gd" id="1_ne1c5"]
 [ext_resource type="PackedScene" uid="uid://bvfijuufvkqd" path="res://Components/Bullet/Bullet.tscn" id="2_i3y7o"]
+[ext_resource type="AudioStream" uid="uid://c3s3f1g7xwrbc" path="res://Art/Sounds/shotgun.wav" id="3_3vbhu"]
+[ext_resource type="PackedScene" uid="uid://cj0d13o2hji8v" path="res://Components/Bullet/ShellComponent/ShotgunShell/shotgun_shell.tscn" id="3_uka70"]
+[ext_resource type="AudioStream" uid="uid://biy7sei3wc8q0" path="res://Art/Sounds/shotgun_reload_sound.wav" id="5_krou8"]
 
-[node name="Shotgun" type="Node2D" node_paths=PackedStringArray("muzzle")]
+[node name="Shotgun" type="Node2D" node_paths=PackedStringArray("muzzle", "shell_drop_position")]
 script = ExtResource("1_ne1c5")
 bullet = ExtResource("2_i3y7o")
-bullet_damage = 1.0
+shell = ExtResource("3_uka70")
+bullet_damage = 0.5
 bullet_speed = 500.0
 bullet_amount = 5
 bullet_spread = 45
 fire_delay = 0.8
+reload_delay = 3.0
 muzzle = NodePath("Muzzle")
+shell_drop_position = NodePath("ShellDropPosition")
+weapon_sound = ExtResource("3_3vbhu")
+weapon_reload_sound = ExtResource("5_krou8")
+max_ammo = 6
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, -1)
@@ -30,3 +39,6 @@ polygon = PackedVector2Array(-2, 0, -2, 2.96685, -2, 6, 5, 6, 5, 4, 5, 3, 5, 2, 
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(17, 1)
+
+[node name="ShellDropPosition" type="Marker2D" parent="."]
+position = Vector2(11, 0)

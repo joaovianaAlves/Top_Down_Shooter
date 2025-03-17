@@ -15,6 +15,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(speed, 0).rotated(rotation)
 	move_and_slide()
+	
+	var collision: KinematicCollision2D = get_last_slide_collision()
+	if collision:
+		var collider: Object = collision.get_collider()
+		if collider is Walls:
+			queue_free()
 
 func _on_timer_timeout() -> void:
 	queue_free()

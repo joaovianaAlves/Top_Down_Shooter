@@ -1,17 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://be4o76w5gdh5g"]
+[gd_scene load_steps=7 format=3 uid="uid://be4o76w5gdh5g"]
 
 [ext_resource type="Texture2D" uid="uid://bhm7570srmf8d" path="res://Art/Player.png" id="1_0g2b2"]
 [ext_resource type="Script" uid="uid://cl767dhrbfw31" path="res://Components/Weapon/Pistol/pistol.gd" id="1_c4rgf"]
 [ext_resource type="PackedScene" uid="uid://bvfijuufvkqd" path="res://Components/Bullet/Bullet.tscn" id="2_daib3"]
+[ext_resource type="PackedScene" uid="uid://dkevlsj6gpnk7" path="res://Components/Bullet/ShellComponent/PistolShell/pistol_shell.tscn" id="3_8qwwc"]
+[ext_resource type="AudioStream" uid="uid://cmj38vlyypxj7" path="res://Art/Sounds/pistol.wav" id="3_xdpy2"]
+[ext_resource type="AudioStream" uid="uid://wojfk6g5sgd" path="res://Art/Sounds/pistol_reload_sound.mp3" id="5_j0lvs"]
 
-[node name="Pistol" type="Node2D" node_paths=PackedStringArray("muzzle")]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("muzzle", "shell_drop_position")]
 script = ExtResource("1_c4rgf")
 bullet = ExtResource("2_daib3")
-bullet_damage = 0.5
+shell = ExtResource("3_8qwwc")
+bullet_damage = 1.0
 bullet_speed = 1000.0
 bullet_amount = 1
-fire_delay = 0.3
+fire_delay = 0.7
+reload_delay = 3.0
 muzzle = NodePath("Muzzle")
+shell_drop_position = NodePath("ShellDropPosition")
+weapon_sound = ExtResource("3_xdpy2")
+weapon_reload_sound = ExtResource("5_j0lvs")
+max_ammo = 12
+reload_on_finish = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3.57628e-07, 0)
@@ -21,3 +31,6 @@ texture = ExtResource("1_0g2b2")
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(6, 0)
 scale = Vector2(-1.73536, -9.91558)
+
+[node name="ShellDropPosition" type="Marker2D" parent="."]
+position = Vector2(-1, -2)

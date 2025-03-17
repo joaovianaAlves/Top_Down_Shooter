@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkevlsj6gpnk7"]
+
+[ext_resource type="Texture2D" uid="uid://cykqflbwnx0ye" path="res://Art/Guns/Shells/pistol_shell.png" id="1_os3a1"]
+
+[node name="PistolShell" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_os3a1")
